@@ -33,7 +33,7 @@ async function executeHookCommand(hook, env) {
 			cwd: hook["command-working-directory"],
 			env: {
 				...process.env,
-				...env
+				...Object.fromEntries(Object.entries(env).map(([k, v]) => [`HOOK_${k.toUpperCase()}`, v]))
 			}
 		})`${hook["execute-command"]}`;
 		if (stderr) {
