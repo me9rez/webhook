@@ -39,16 +39,9 @@
 
 ## 📦 安装
 
-### 使用Bun（推荐）
-
 ```bash
-bun install
-```
-
-### 使用npm
-
-```bash
-npm install
+# 使用pnpm安装
+pnpm install @me9rez/webhook
 ```
 
 ## ⚙️ 配置
@@ -80,22 +73,10 @@ npm install
 
 ## 🚀 运行
 
-### 直接运行
-
-```bash
-bun run src/cli.ts
-```
-
-或使用npm：
-
-```bash
-npm run start
-```
-
 ### 使用命令行参数
 
 ```bash
-bun run src/cli.ts --hooks ./my-hooks.json --port 8080
+webhook --hooks ./my-hooks.json --port 8080
 ```
 
 可用参数：
@@ -153,7 +134,7 @@ curl -X POST http://localhost:3000/hooks/example \
 所有请求参数（无论是GET查询参数还是POST JSON数据）都会作为环境变量传递给执行的命令。参数名会被转换为大写，并添加前缀`HOOK_`。例如：
 
 - `param1` 变为 `HOOK_PARAM1`
-- `branch-name` 变为 `HOOK_BRANCH_NAME`
+- `branch-name` 变为 `HOOK_BRANCH-NAME`
 
 ### 🏥 健康检查
 
