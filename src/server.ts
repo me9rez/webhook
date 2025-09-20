@@ -11,15 +11,19 @@ async function executeHookCommand(hook: Hook, env: Record<string, any>) {
     if (!hook['command-working-directory']) {
       throw new Error('未指定工作目录')
     }
-    
+
     logger.info(`执行钩子 ${hook.id} 的命令: ${hook['execute-command']}`)
-    
+
+    // 注入的环境变量为HOOK_{大写}模式
     // 执行命令
     const { stdout, stderr } = await execa({
       cwd: hook['command-working-directory'],
-      env: { ...process.env, ...env }
+      env: {
+        ...process.env,
+        ...Object.fromEntries(Object.entries(env).map(([k, v]) => [`HOOK_${k.toUpperCase()}`, v]))
+      }
     })`${hook['execute-command']}`
-    
+
     if (stderr) {
       logger.error(`钩子 ${hook.id} 执行出错:`, stderr)
       return {
@@ -27,7 +31,7 @@ async function executeHookCommand(hook: Hook, env: Record<string, any>) {
         data: stderr,
       }
     }
-    
+
     logger.info(`钩子 ${hook.id} 执行成功`)
     return {
       code: 0,
@@ -88,7 +92,7 @@ function createErrorHandler() {
 
 export function createServer(hooks: HooksArray, port: number = 3000) {
   const app = new Hono()
-  
+
   // 健康检查端点
   app.get('/health', (c) => {
     logger.debug('健康检查请求')
@@ -97,30 +101,30 @@ export function createServer(hooks: HooksArray, port: number = 3000) {
       timestamp: new Date().toISOString()
     })
   })
-  
+
   // 注册每个钩子的路由
   hooks.forEach((hook) => {
     const route = `/hooks/${hook.id}`
-    
+
     // GET 请求处理
     app.get(route, async (c) => {
       const result = await handleGetRequest(c, hook)
       return c.json(result)
     })
-    
+
     // POST 请求处理
     app.post(route, async (c) => {
       const result = await handlePostRequest(c, hook)
       return c.json(result)
     })
   })
-  
+
   // 404 处理
   app.notFound(createNotFoundHandler())
-  
+
   // 错误处理
   app.onError(createErrorHandler())
-  
+
   // 启动服务
   logger.info(`服务启动地址：http://127.0.0.1:${port}`)
   return serve({
