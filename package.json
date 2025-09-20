@@ -1,6 +1,6 @@
 {
   "name": "@me9rez/webhook",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A lightweight webhook server that triggers system commands via HTTP requests",
   "keywords": [
     "webhook",
@@ -33,7 +33,8 @@
     "build": "tsdown",
     "dev": "bun run --watch src/cli.ts",
     "help": "bun run ./src/cli.ts --help",
-    "start": "bun run ./src/cli.ts"
+    "start": "bun run ./src/cli.ts",
+    "release": "release-it"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.3",
@@ -44,9 +45,14 @@
   "devDependencies": {
     "@types/bun": "latest",
     "@types/node": "^20.11.0",
+    "release-it": "^19.0.5",
     "tsdown": "^0.15.2"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }
