@@ -106,7 +106,7 @@ bun run src/cli.ts --hooks ./my-hooks.json --port 8080
 ### 作为模块集成
 
 ```javascript
-import { createServer } from '@me9rez/wekhook';
+import { createServer } from '@me9rez/webhook';
 
 // 定义hooks配置
 const hooks = [
@@ -221,5 +221,5 @@ bun run build
 
 ## 📞 联系
 
-如有问题或建议，请在[GitHub Issues](https://github.com/me9rez/wekhook/issues)中提出
+如有问题或建议，请在[GitHub Issues](https://github.com/me9rez/webhook/issues)中提出
 

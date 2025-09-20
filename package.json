@@ -1,5 +1,5 @@
 {
-  "name": "@me9rez/wekhook",
+  "name": "@me9rez/webhook",
   "version": "0.0.1",
   "description": "A lightweight webhook server that triggers system commands via HTTP requests",
   "keywords": [
@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/me9rez/wekhook.git"
+    "url": "https://github.com/me9rez/webhook.git"
   },
   "license": "MIT",
   "author": "me9rez",
@@ -24,7 +24,7 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "wekhook": "./dist/cli.js"
+    "webhook": "./dist/cli.js"
   },
   "files": [
     "dist/"
