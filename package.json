@@ -1,6 +1,6 @@
 {
-  "name": "wekhook",
-  "version": "1.0.0",
+  "name": "@me9rez/wekhook",
+  "version": "0.0.1",
   "description": "A lightweight webhook server that triggers system commands via HTTP requests",
   "keywords": [
     "webhook",
@@ -22,17 +22,18 @@
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "bin": {
-    "wekhook": "./dist/index.js"
+    "wekhook": "./dist/cli.js"
   },
   "files": [
     "dist/"
   ],
   "scripts": {
     "build": "tsdown",
-    "dev": "bun run --watch src/index.ts",
-    "help": "bun run ./src/index.ts --help",
-    "start": "bun run ./src/index.ts"
+    "dev": "bun run --watch src/cli.ts",
+    "help": "bun run ./src/cli.ts --help",
+    "start": "bun run ./src/cli.ts"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.3",
